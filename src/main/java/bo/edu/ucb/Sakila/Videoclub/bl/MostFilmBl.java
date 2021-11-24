@@ -17,11 +17,16 @@ public class MostFilmBl {
     public MostFilmBl(MostFilmDao mostFilmDao) {
         this.mostFilmDao = mostFilmDao;
     }
-
     public List<Film> findTheMost(int country) {
         if (country<=0) {
             throw new SakilaException(403, "Bad request: The country can't be 0 or null");
         }
         return mostFilmDao.findTheMost(country);
+    }
+    public List<Film> findPremier(int country) {
+        if (country<=0) {
+            throw new SakilaException(403, "Bad request: The country can't be 0 or null");
+        }
+        return mostFilmDao.findPremier(country);
     }
 }

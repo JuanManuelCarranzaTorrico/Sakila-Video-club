@@ -4,11 +4,10 @@ import bo.edu.ucb.Sakila.Videoclub.bl.MostFilmBl;
 import bo.edu.ucb.Sakila.Videoclub.bl.FilmSearchBl;
 import bo.edu.ucb.Sakila.Videoclub.bl.ActorSearchBl;
 import bo.edu.ucb.Sakila.Videoclub.dto.Film;
+import bo.edu.ucb.Sakila.Videoclub.dto.Customer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -47,6 +46,17 @@ public class SakilaApi {
     public List<Film> findTheMost(@PathVariable(name = "country") int country) {
         System.out.println("Invocando al metodo GET!!!!!!!!!!!");
         return mostFilmBl.findTheMost(country);
+    }
+
+    @GetMapping(value = "/main1/{country}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<Film> findPremier(@PathVariable(name = "country") int country) {
+        System.out.println("Invocando al metodo GET!!!!!!!!!!!");
+        return mostFilmBl.findPremier(country);
+    }
+
+    @PostMapping(value = "/customer",consumes = {MediaType.APPLICATION_JSON_VALUE,MediaType.APPLICATION_XML_VALUE})
+    public Customer Prueba1(@RequestBody Customer customer){
+        return customer;
     }
 
 }
