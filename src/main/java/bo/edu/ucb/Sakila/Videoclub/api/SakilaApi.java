@@ -1,6 +1,8 @@
 package bo.edu.ucb.Sakila.Videoclub.api;
 
+import bo.edu.ucb.Sakila.Videoclub.bl.MostFilmBl;
 import bo.edu.ucb.Sakila.Videoclub.bl.FilmSearchBl;
+import bo.edu.ucb.Sakila.Videoclub.bl.ActorSearchBl;
 import bo.edu.ucb.Sakila.Videoclub.dto.Film;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -20,10 +22,15 @@ import java.util.List;
 public class SakilaApi {
 
     FilmSearchBl filmSearchBl;
+    ActorSearchBl actorSearchBl;
+    MostFilmBl mostFilmBl;
 
     @Autowired
-    public SakilaApi(FilmSearchBl filmSearchBl) {
+    public SakilaApi(FilmSearchBl filmSearchBl, ActorSearchBl actorSearchBl, MostFilmBl mostFilmBl) {
+
         this.filmSearchBl = filmSearchBl;
+        this.actorSearchBl= actorSearchBl;
+        this.mostFilmBl= mostFilmBl;
     }
 
     @GetMapping(value = "/film/{title}", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -31,4 +38,15 @@ public class SakilaApi {
         System.out.println("Invocando al metodo GET!!!!!!!!!!!");
         return filmSearchBl.findByTitle(title);
     }
+    @GetMapping(value = "/actor/{name}/{surname}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<Film> findByActor(@PathVariable(name = "name") String name,@PathVariable(name="surname") String surname){
+        return actorSearchBl.findByName(name,surname);
+    }
+
+    @GetMapping(value = "/main/{country}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<Film> findTheMost(@PathVariable(name = "country") int country) {
+        System.out.println("Invocando al metodo GET!!!!!!!!!!!");
+        return mostFilmBl.findTheMost(country);
+    }
+
 }
