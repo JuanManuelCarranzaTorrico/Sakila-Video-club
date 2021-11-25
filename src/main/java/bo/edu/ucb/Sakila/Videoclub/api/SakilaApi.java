@@ -1,11 +1,14 @@
 package bo.edu.ucb.Sakila.Videoclub.api;
 
+import bo.edu.ucb.Sakila.Videoclub.bl.ActorFilmSearchBl;
+import bo.edu.ucb.Sakila.Videoclub.bl.RentalBl;
 import bo.edu.ucb.Sakila.Videoclub.bl.CustomerBl;
 import bo.edu.ucb.Sakila.Videoclub.bl.MostFilmBl;
 import bo.edu.ucb.Sakila.Videoclub.bl.FilmSearchBl;
 import bo.edu.ucb.Sakila.Videoclub.bl.ActorSearchBl;
 import bo.edu.ucb.Sakila.Videoclub.dto.Film;
 import bo.edu.ucb.Sakila.Videoclub.dto.Customer;
+import bo.edu.ucb.Sakila.Videoclub.dto.Rental;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -25,14 +28,16 @@ public class SakilaApi {
     ActorSearchBl actorSearchBl;
     MostFilmBl mostFilmBl;
     CustomerBl customerBl;
+    ActorFilmSearchBl actorFilmSearchBl;
 
     @Autowired
-    public SakilaApi(FilmSearchBl filmSearchBl, ActorSearchBl actorSearchBl, MostFilmBl mostFilmBl, CustomerBl customerBl) {
+    public SakilaApi(FilmSearchBl filmSearchBl, ActorSearchBl actorSearchBl, MostFilmBl mostFilmBl, CustomerBl customerBl,ActorFilmSearchBl actorFilmSearchBl) {
 
         this.filmSearchBl = filmSearchBl;
         this.actorSearchBl= actorSearchBl;
         this.mostFilmBl= mostFilmBl;
         this.customerBl=customerBl;
+        this.actorSearchBl=actorSearchBl;
     }
 
     @GetMapping(value = "/film/{title}", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -44,7 +49,6 @@ public class SakilaApi {
     public List<Film> findByActor(@PathVariable(name = "name") String name,@PathVariable(name="surname") String surname){
         return actorSearchBl.findByName(name,surname);
     }
-
     @GetMapping(value = "/main/{country}", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Film> findTheMost(@PathVariable(name = "country") int country) {
         System.out.println("Invocando al metodo GET!!!!!!!!!!!");
@@ -61,5 +65,11 @@ public class SakilaApi {
     public String createCustomer(@RequestBody Customer customer){
         return customerBl.createCustomer(customer);
     }
+
+    @GetMapping(value = "/film/{name}/{surname}/{film}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<Film> actorFilm(@PathVariable(name = "name") String name,@PathVariable(name="surname") String surname,@PathVariable(name="film")String film){
+        return actorFilmSearchBl.actorFilm(name,surname,film);
+    }
+
 
 }
