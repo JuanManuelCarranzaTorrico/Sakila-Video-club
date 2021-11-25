@@ -24,7 +24,7 @@ public class CustomerDao {
                 "( ? ),"+
                 "( ? ),"+
                 "( ? ),"+
-                "now()"+
+                "now(),"+
                 "now());";
         try (
                 Connection conn = dataSource.getConnection();
@@ -37,7 +37,7 @@ public class CustomerDao {
             pstmt.setString(5,customer.getEmail());
             pstmt.setInt(6,customer.getAddressId());
             pstmt.setInt(7,customer.getActive());
-            pstmt.executeQuery();
+            pstmt.executeUpdate();
             realizado="se Logro";
 
         } catch (SQLException ex) {

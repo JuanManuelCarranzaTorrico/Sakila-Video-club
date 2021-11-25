@@ -1,5 +1,6 @@
 package bo.edu.ucb.Sakila.Videoclub.api;
 
+import bo.edu.ucb.Sakila.Videoclub.bl.CustomerBl;
 import bo.edu.ucb.Sakila.Videoclub.bl.MostFilmBl;
 import bo.edu.ucb.Sakila.Videoclub.bl.FilmSearchBl;
 import bo.edu.ucb.Sakila.Videoclub.bl.ActorSearchBl;
@@ -23,13 +24,15 @@ public class SakilaApi {
     FilmSearchBl filmSearchBl;
     ActorSearchBl actorSearchBl;
     MostFilmBl mostFilmBl;
+    CustomerBl customerBl;
 
     @Autowired
-    public SakilaApi(FilmSearchBl filmSearchBl, ActorSearchBl actorSearchBl, MostFilmBl mostFilmBl) {
+    public SakilaApi(FilmSearchBl filmSearchBl, ActorSearchBl actorSearchBl, MostFilmBl mostFilmBl, CustomerBl customerBl) {
 
         this.filmSearchBl = filmSearchBl;
         this.actorSearchBl= actorSearchBl;
         this.mostFilmBl= mostFilmBl;
+        this.customerBl=customerBl;
     }
 
     @GetMapping(value = "/film/{title}", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -55,8 +58,8 @@ public class SakilaApi {
     }
 
     @PostMapping(value = "/customer",consumes = {MediaType.APPLICATION_JSON_VALUE,MediaType.APPLICATION_XML_VALUE})
-    public String Prueba1(@RequestBody Customer customer){
-        return customer.getFirstName();
+    public String createCustomer(@RequestBody Customer customer){
+        return customerBl.createCustomer(customer);
     }
 
 }

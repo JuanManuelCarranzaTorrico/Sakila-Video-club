@@ -39,7 +39,7 @@ public class MostFilmDao {
                 "   Left join country cn on (cn.country_id=ct.country_id)   "+
                 "   LEFT JOIN language l ON ( f.language_id = l.language_id)    "+
                 "   LEFT JOIN language ol ON ( f.original_language_id = ol.language_id) "+
-                "   where cn.country_id= ( ? )  "+
+                "   where s.store_id= ( ? )  "+
                 "   group by f.film_id  "+
                 "order by count(r.rental_id) desc;";
 
@@ -50,7 +50,8 @@ public class MostFilmDao {
             System.out.println(query);
             pstmt.setInt(1, country);
             ResultSet rs = pstmt.executeQuery();
-            while(rs.next()) {
+            int contador=0;
+            while(rs.next()&contador<10) {
                 Film film = new Film();
                 film.setFilmId(rs.getInt("film_id"));
                 film.setTitle(rs.getString("title"));
@@ -65,6 +66,7 @@ public class MostFilmDao {
                 film.setLastUpdate(new java.util.Date(lastUpdate.getTime()));
 
                 result.add(film);
+                contador++;
             }
             //Probamos la respuesta xd
             System.out.println(result);
@@ -92,16 +94,19 @@ public class MostFilmDao {
                 "   f.special_features, " +
                 "   f.last_update " +
                 "   from film f "+
-                "   Left join inventory i on (i.film_id=f.film_id)  "+
-                "   Left join store s on (s.store_id=i.store_id)    "+
-                "   Left join address a on (a.address_id=s.address_id)  "+
-                "   Left join city ct on (ct.city_id=a.city_id) "+
-                "   Left join country cn on (cn.country_id=ct.country_id)   "+
+                "   left join inventory i on (i.film_id=f.film_id)  "+
+                "   left join rental r on (r.inventory_id=i.inventory_id)   "+
+                "   left join store s on (s.store_id=i.store_id)  "+
+                "   left join address a on (a.address_id=s.address_id) "+
+                "   left join city cy on (cy.city_id=a.city_id)   " +
+                "   left join country cc on(cc.country_id=cy.country_id)" +
+                "   left join film_category fc on (fc.film_id=f.film_id)" +
+                "   left join category c on(c.category_id=fc.category_id)"+
                 "   LEFT JOIN language l ON ( f.language_id = l.language_id)    "+
                 "   LEFT JOIN language ol ON ( f.original_language_id = ol.language_id) "+
-                "   where cn.country_id= ( ? )  "+
-                "   group by f.film_id  "+
-                "order by DATE(i.last_update) desc;";
+                "   where s.store_id= ( ? )  "+
+                "   ORDER BY film_id DESC  "+
+                "LIMIT 10;" ;
 
         try (
                 Connection conn = dataSource.getConnection();

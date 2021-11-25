@@ -11,9 +11,9 @@ public class Customer {
     private Integer addressId;
     private Integer active;
 
-     private Date createDate;
+     /*private Date createDate;
 
-    private Date lastDate;
+    private Date lastDate;*/
     public Customer(){
 
     }
@@ -68,7 +68,7 @@ public class Customer {
     public void setActive(Integer active) {
         this.active = active;
     }
-    public Date getCreateDate() {
+   /* public Date getCreateDate() {
         return createDate;
     }
 
@@ -83,7 +83,7 @@ public class Customer {
 
     public void setCreateDate(Date createDate) {
         this.createDate = createDate;
-    }
+    }*/
 
 
 
