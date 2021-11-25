@@ -1,5 +1,5 @@
 package bo.edu.ucb.Sakila.Videoclub.api;
-
+import bo.edu.ucb.Sakila.Videoclub.bl.PaymentBl;
 import bo.edu.ucb.Sakila.Videoclub.bl.ActorFilmSearchBl;
 import bo.edu.ucb.Sakila.Videoclub.bl.RentalBl;
 import bo.edu.ucb.Sakila.Videoclub.bl.CustomerBl;
@@ -9,6 +9,7 @@ import bo.edu.ucb.Sakila.Videoclub.bl.ActorSearchBl;
 import bo.edu.ucb.Sakila.Videoclub.dto.Film;
 import bo.edu.ucb.Sakila.Videoclub.dto.Customer;
 import bo.edu.ucb.Sakila.Videoclub.dto.Rental;
+import bo.edu.ucb.Sakila.Videoclub.dto.Payment;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -30,9 +31,10 @@ public class SakilaApi {
     CustomerBl customerBl;
     ActorFilmSearchBl actorFilmSearchBl;
     RentalBl rentalBl;
+    PaymentBl paymentBl;
 
     @Autowired
-    public SakilaApi(FilmSearchBl filmSearchBl, ActorSearchBl actorSearchBl, MostFilmBl mostFilmBl, CustomerBl customerBl,ActorFilmSearchBl actorFilmSearchBl, RentalBl rentalBl) {
+    public SakilaApi(FilmSearchBl filmSearchBl, ActorSearchBl actorSearchBl, MostFilmBl mostFilmBl, CustomerBl customerBl,ActorFilmSearchBl actorFilmSearchBl, RentalBl rentalBl, PaymentBl paymentBl) {
 
         this.filmSearchBl = filmSearchBl;
         this.actorSearchBl= actorSearchBl;
@@ -40,6 +42,7 @@ public class SakilaApi {
         this.customerBl=customerBl;
         this.actorSearchBl=actorSearchBl;
         this.rentalBl=rentalBl;
+        this.paymentBl=paymentBl;
     }
 
     @GetMapping(value = "/film/{title}", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -77,6 +80,11 @@ public class SakilaApi {
     public String createRental(@RequestBody Rental rental){
         return rentalBl.createRental(rental);
 
+    }
+
+    @PostMapping(value = "/payment",consumes = MediaType.APPLICATION_JSON_VALUE)
+    public  String createPayment(@RequestBody Payment payment){
+        return paymentBl.createPayment(payment);
     }
 
 
