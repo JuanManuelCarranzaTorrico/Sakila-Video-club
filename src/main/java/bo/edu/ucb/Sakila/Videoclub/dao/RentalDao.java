@@ -30,7 +30,7 @@ public class RentalDao {
         ){
             pstmt.setInt(1,rental.getInventoryId());
             pstmt.setInt(2,rental.getCustomerId());
-            pstmt.setInt(1,rental.getStaffId());
+            pstmt.setInt(3,rental.getStaffId());
             pstmt.executeUpdate();
             realizado="Se logro :)";
 

@@ -29,15 +29,17 @@ public class SakilaApi {
     MostFilmBl mostFilmBl;
     CustomerBl customerBl;
     ActorFilmSearchBl actorFilmSearchBl;
+    RentalBl rentalBl;
 
     @Autowired
-    public SakilaApi(FilmSearchBl filmSearchBl, ActorSearchBl actorSearchBl, MostFilmBl mostFilmBl, CustomerBl customerBl,ActorFilmSearchBl actorFilmSearchBl) {
+    public SakilaApi(FilmSearchBl filmSearchBl, ActorSearchBl actorSearchBl, MostFilmBl mostFilmBl, CustomerBl customerBl,ActorFilmSearchBl actorFilmSearchBl, RentalBl rentalBl) {
 
         this.filmSearchBl = filmSearchBl;
         this.actorSearchBl= actorSearchBl;
         this.mostFilmBl= mostFilmBl;
         this.customerBl=customerBl;
         this.actorSearchBl=actorSearchBl;
+        this.rentalBl=rentalBl;
     }
 
     @GetMapping(value = "/film/{title}", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -72,8 +74,8 @@ public class SakilaApi {
     }
 
     @PostMapping(value = "/rental",consumes = {MediaType.APPLICATION_JSON_VALUE,MediaType.APPLICATION_XML_VALUE})
-    public Rental createRental(@RequestBody Rental rental){
-        return rental;
+    public String createRental(@RequestBody Rental rental){
+        return rentalBl.createRental(rental);
 
     }
 
