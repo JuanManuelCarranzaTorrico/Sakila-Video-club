@@ -6,14 +6,14 @@ public class Payment {
     private Integer staffId;
     private Integer rentalId;
     private double amount;
-    private Date paymentDate;
-    private Date lastUpDate;
+    //private Date paymentDate;
+    //private Date lastUpDate;
     public Payment(){
         
     }
-    public Date getLastUpDate() {
+    /*public Date getLastUpDate() {
         return lastUpDate;
-    }
+    }*/
     public Integer getPaymentId() {
         return paymentId;
     }
@@ -44,7 +44,7 @@ public class Payment {
     public void setAmount(double amount) {
         this.amount = amount;
     }
-    public Date getPaymentDate() {
+    /*public Date getPaymentDate() {
         return paymentDate;
     }
     public void setPaymentDate(Date paymentDate) {
@@ -52,5 +52,5 @@ public class Payment {
     }
     public void setLastUpDate(Date lastUpDate) {
         this.lastUpDate = lastUpDate;
-    }
+    }*/
 }
