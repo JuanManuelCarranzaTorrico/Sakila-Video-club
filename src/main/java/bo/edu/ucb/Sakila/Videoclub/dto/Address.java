@@ -7,18 +7,18 @@ public class Address {
     private String address;
     private String address2;
     private String district;
-    private String city;
+    private int city;
     private String postalCode;
     private String phone;
-    private Date lastUpDate;
+   // private Date lastUpDate;
     
 
     public Address(){
         
     }
-    public Date getLastUpDate() {
+    /*public Date getLastUpDate() {
         return lastUpDate;
-    }
+    }*/
     public Integer getAddresId() {
         return addresId;
     }
@@ -43,10 +43,10 @@ public class Address {
     public void setDistrict(String district) {
         this.district = district;
     }
-    public String getCity() {
+    public int getCity() {
         return city;
     }
-    public void setCity(String city) {
+    public void setCity(int city) {
         this.city = city;
     }
     public String getPostalCode() {
@@ -61,7 +61,7 @@ public class Address {
     public void setPhone(String phone) {
         this.phone = phone;
     }
-    public void setLastUpDate(Date lastUpDate) {
+    /*public void setLastUpDate(Date lastUpDate) {
         this.lastUpDate = lastUpDate;
-    }
+    }*/
 }
