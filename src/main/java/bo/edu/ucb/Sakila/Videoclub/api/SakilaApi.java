@@ -55,8 +55,8 @@ public class SakilaApi {
     }
 
     @PostMapping(value = "/customer",consumes = {MediaType.APPLICATION_JSON_VALUE,MediaType.APPLICATION_XML_VALUE})
-    public Customer Prueba1(@RequestBody Customer customer){
-        return customer;
+    public String Prueba1(@RequestBody Customer customer){
+        return customer.getFirstName();
     }
 
 }
