@@ -71,5 +71,11 @@ public class SakilaApi {
         return actorFilmSearchBl.actorFilm(name,surname,film);
     }
 
+    @PostMapping(value = "/rental",consumes = {MediaType.APPLICATION_JSON_VALUE,MediaType.APPLICATION_XML_VALUE})
+    public Rental createRental(@RequestBody Rental rental){
+        return rental;
+
+    }
+
 
 }
