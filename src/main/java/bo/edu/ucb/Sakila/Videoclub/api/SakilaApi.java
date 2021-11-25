@@ -1,15 +1,11 @@
 package bo.edu.ucb.Sakila.Videoclub.api;
-import bo.edu.ucb.Sakila.Videoclub.bl.PaymentBl;
-import bo.edu.ucb.Sakila.Videoclub.bl.ActorFilmSearchBl;
-import bo.edu.ucb.Sakila.Videoclub.bl.RentalBl;
-import bo.edu.ucb.Sakila.Videoclub.bl.CustomerBl;
-import bo.edu.ucb.Sakila.Videoclub.bl.MostFilmBl;
-import bo.edu.ucb.Sakila.Videoclub.bl.FilmSearchBl;
-import bo.edu.ucb.Sakila.Videoclub.bl.ActorSearchBl;
+import bo.edu.ucb.Sakila.Videoclub.bl.*;
+
 import bo.edu.ucb.Sakila.Videoclub.dto.Film;
 import bo.edu.ucb.Sakila.Videoclub.dto.Customer;
 import bo.edu.ucb.Sakila.Videoclub.dto.Rental;
 import bo.edu.ucb.Sakila.Videoclub.dto.Payment;
+import bo.edu.ucb.Sakila.Videoclub.dto.Address;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -32,9 +28,10 @@ public class SakilaApi {
     ActorFilmSearchBl actorFilmSearchBl;
     RentalBl rentalBl;
     PaymentBl paymentBl;
+    AddressBl addressBl;
 
     @Autowired
-    public SakilaApi(FilmSearchBl filmSearchBl, ActorSearchBl actorSearchBl, MostFilmBl mostFilmBl, CustomerBl customerBl,ActorFilmSearchBl actorFilmSearchBl, RentalBl rentalBl, PaymentBl paymentBl) {
+    public SakilaApi(FilmSearchBl filmSearchBl, ActorSearchBl actorSearchBl, MostFilmBl mostFilmBl, CustomerBl customerBl, ActorFilmSearchBl actorFilmSearchBl, RentalBl rentalBl, PaymentBl paymentBl, AddressBl addressBl) {
 
         this.filmSearchBl = filmSearchBl;
         this.actorSearchBl= actorSearchBl;
@@ -43,6 +40,7 @@ public class SakilaApi {
         this.actorSearchBl=actorSearchBl;
         this.rentalBl=rentalBl;
         this.paymentBl=paymentBl;
+        this.addressBl=addressBl;
     }
 
     @GetMapping(value = "/film/{title}", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -85,6 +83,11 @@ public class SakilaApi {
     @PostMapping(value = "/payment",consumes = MediaType.APPLICATION_JSON_VALUE)
     public  String createPayment(@RequestBody Payment payment){
         return paymentBl.createPayment(payment);
+    }
+
+    @PostMapping(value = "/address",consumes = MediaType.APPLICATION_JSON_VALUE)
+    public  String createAdrees(@RequestBody Address address){
+        return addressBl.createAddress(address);
     }
 
 
