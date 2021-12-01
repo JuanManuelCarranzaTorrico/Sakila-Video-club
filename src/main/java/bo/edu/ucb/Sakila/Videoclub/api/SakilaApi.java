@@ -42,49 +42,52 @@ public class SakilaApi {
         this.paymentBl=paymentBl;
         this.addressBl=addressBl;
     }
-
+    @CrossOrigin(origins = "http://localhost:8081")
     @GetMapping(value = "/film/{title}", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Film> findBytTitle(@PathVariable(name = "title") String title) {
         System.out.println("Invocando al metodo GET!!!!!!!!!!!");
         return filmSearchBl.findByTitle(title);
     }
+    @CrossOrigin(origins = "http://localhost:8081")
     @GetMapping(value = "/actor/{name}/{surname}", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Film> findByActor(@PathVariable(name = "name") String name,@PathVariable(name="surname") String surname){
         return actorSearchBl.findByName(name,surname);
     }
+    @CrossOrigin(origins = "http://localhost:8081")
     @GetMapping(value = "/main/{country}", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Film> findTheMost(@PathVariable(name = "country") int country) {
         System.out.println("Invocando al metodo GET!!!!!!!!!!!");
         return mostFilmBl.findTheMost(country);
     }
 
+    @CrossOrigin(origins = "http://localhost:8081")
     @GetMapping(value = "/main1/{country}", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Film> findPremier(@PathVariable(name = "country") int country) {
         System.out.println("Invocando al metodo GET!!!!!!!!!!!");
         return mostFilmBl.findPremier(country);
     }
-
+    @CrossOrigin(origins = "http://localhost:8081")
     @PostMapping(value = "/customer",consumes = {MediaType.APPLICATION_JSON_VALUE,MediaType.APPLICATION_XML_VALUE})
     public String createCustomer(@RequestBody Customer customer){
         return customerBl.createCustomer(customer);
     }
-
+    @CrossOrigin(origins = "http://localhost:8081")
     @GetMapping(value = "/film/{name}/{surname}/{film}", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Film> actorFilm(@PathVariable(name = "name") String name,@PathVariable(name="surname") String surname,@PathVariable(name="film")String film){
         return actorFilmSearchBl.actorFilm(name,surname,film);
     }
-
+    @CrossOrigin(origins = "http://localhost:8081")
     @PostMapping(value = "/rental",consumes = {MediaType.APPLICATION_JSON_VALUE,MediaType.APPLICATION_XML_VALUE})
     public String createRental(@RequestBody Rental rental){
         return rentalBl.createRental(rental);
 
     }
-
+    @CrossOrigin(origins = "http://localhost:8081")
     @PostMapping(value = "/payment",consumes = MediaType.APPLICATION_JSON_VALUE)
     public  String createPayment(@RequestBody Payment payment){
         return paymentBl.createPayment(payment);
     }
-
+    @CrossOrigin(origins = "http://localhost:8081")
     @PostMapping(value = "/address",consumes = MediaType.APPLICATION_JSON_VALUE)
     public  String createAdrees(@RequestBody Address address){
         return addressBl.createAddress(address);
