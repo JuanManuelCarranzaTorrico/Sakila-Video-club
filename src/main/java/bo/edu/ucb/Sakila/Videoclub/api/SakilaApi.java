@@ -67,6 +67,12 @@ public class SakilaApi {
         return mostFilmBl.findPremier(country);
     }
     @CrossOrigin(origins = "http://localhost:8081")
+    @GetMapping(value = "/main2/{country}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<Film> findMostWeek(@PathVariable(name = "country") int country) {
+        System.out.println("Invocando al metodo GET!!!!!!!!!!!");
+        return mostFilmBl.findMostWeek(country);
+    }
+    @CrossOrigin(origins = "http://localhost:8081")
     @PostMapping(value = "/customer",consumes = {MediaType.APPLICATION_JSON_VALUE,MediaType.APPLICATION_XML_VALUE})
     public String createCustomer(@RequestBody Customer customer){
         return customerBl.createCustomer(customer);

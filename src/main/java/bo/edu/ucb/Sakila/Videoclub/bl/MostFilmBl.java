@@ -29,4 +29,10 @@ public class MostFilmBl {
         }
         return mostFilmDao.findPremier(country);
     }
+    public List<Film> findMostWeek(int country) {
+        if (country<=0) {
+            throw new SakilaException(403, "Bad request: The country can't be 0 or null");
+        }
+        return mostFilmDao.findMostWeek(country);
+    }
 }
