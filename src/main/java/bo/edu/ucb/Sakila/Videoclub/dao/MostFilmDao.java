@@ -83,7 +83,7 @@ public class MostFilmDao {
 
     public List<Film> findPremier(int country) {
         List<Film> result = new ArrayList<>();
-        String query = "SELECT f.film_id, " +
+        String query = "SELECT DISTINCT f.film_id, " +
                 "   f.title, " +
                 "   f.description, " +
                 "   f.release_year, " +

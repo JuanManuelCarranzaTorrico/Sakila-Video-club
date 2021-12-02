@@ -17,7 +17,7 @@ public class CustomerDao {
     public String createCustomer(Customer customer){
         String realizado="";
         String query ="INSERT INTO customer VALUES ("+
-                "( ? ),"+
+                "(select max(r.customer_id) from customer r ) +1,"+
                 "( ? ),"+
                 "( ? ),"+
                 "( ? ),"+
@@ -30,13 +30,13 @@ public class CustomerDao {
                 Connection conn = dataSource.getConnection();
                 PreparedStatement pstmt =  conn.prepareStatement(query);
         ) {
-            pstmt.setInt(1,customer.getCustomerId());
-            pstmt.setInt(2,customer.getStoreId());
-            pstmt.setString(3,customer.getFirstName());
-            pstmt.setString(4,customer.getLastName());
-            pstmt.setString(5,customer.getEmail());
-            pstmt.setInt(6,customer.getAddressId());
-            pstmt.setInt(7,customer.getActive());
+           // pstmt.setInt(1,customer.getCustomerId());
+            pstmt.setInt(1,customer.getStoreId());
+            pstmt.setString(2,customer.getFirstName());
+            pstmt.setString(3,customer.getLastName());
+            pstmt.setString(4,customer.getEmail());
+            pstmt.setInt(5,customer.getAddressId());
+            pstmt.setInt(6,customer.getActive());
             pstmt.executeUpdate();
             realizado="se Logro";
 
