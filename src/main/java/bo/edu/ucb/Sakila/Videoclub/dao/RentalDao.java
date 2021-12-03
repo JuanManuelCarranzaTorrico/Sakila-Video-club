@@ -19,7 +19,7 @@ public class RentalDao {
         String query="INSERT INTO rental VALUES (" +
                 "(select max(r.rental_id) from rental r ) +1," +
                 "now()," +
-                "( ? )," +
+                "(select i.inventory_id from inventory i where i.film_id=( ? ) limit 1)," +
                 "( ? )," +
                 "now()," +
                 "( ? )," +
